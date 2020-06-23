@@ -32,7 +32,7 @@
     "version": "1.0.0",
     "date": "Junio, 2020",
     "author": "",
-    "org": "Centro Nacional de Información Geográfica - Instituto Geográfico Nacional. Ministerio de Transportes, Mobilidad y Agenda Urbana",
+    "org": "Consejería de Hacienda, Industria y Energía. Junta de Andalucía.",
     "tags": "mapea,plugin",
     "icon": "./facade/assets/icons/icons.svg",
     "centralized": true
