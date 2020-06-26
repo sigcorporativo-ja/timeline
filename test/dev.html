@@ -8,7 +8,7 @@
     <meta name="mapea" content="yes">
     <title>Timeline TEST</title>
     <link href="http://sigc-dev.desarrollo.guadaltel.es/mapea5/assets/css/mapea-5.2.0.ol.min.css" rel="stylesheet" />
-
+    <link href="../dist/timeline.ol.min.css" rel="stylesheet" />
 
     <style rel="stylesheet">
         html,
@@ -26,8 +26,18 @@
     <div id="mapjs" class="container"></div>
     <script type="text/javascript" src="http://sigc-dev.desarrollo.guadaltel.es/mapea5/js/mapea-5.2.0.ol.min.js"></script>
     <script type="text/javascript" src="http://sigc-dev.desarrollo.guadaltel.es/mapea5/js/configuration-5.2.0.js"></script>
+    <script type="text/javascript" src="../dist/timeline.ol.min.js"></script>
+    <script>
+        const map = M.map({
+            container: 'mapjs'
+        });
+        const mp = new M.plugin.Timeline({
+            position: 'TR',
+            intervals: '[["NACIONAL 1981-1986","1986","WMS*NACIONAL_1981-1986*https://www.ign.es/wms/pnoa-historico*NACIONAL_1981-1986"],["OLISTAT","1998","WMS*OLISTAT*https://www.ign.es/wms/pnoa-historico*OLISTAT"],["SIGPAC","2003","WMS*SIGPAC*https://www.ign.es/wms/pnoa-historico*SIGPAC"],["PNOA 2004","2004","WMS*pnoa2004*https://www.ign.es/wms/pnoa-historico*pnoa2004"],["PNOA 2005","2005","WMS*pnoa2005*https://www.ign.es/wms/pnoa-historico*pnoa2005"],["PNOA 2006","2006","WMS*pnoa2006*https://www.ign.es/wms/pnoa-historico*pnoa2006"],["PNOA 2010","2010","WMS*pnoa2010*https://www.ign.es/wms/pnoa-historico*pnoa2010"]]',
+        });
 
-    <script type="text/javascript" src="/main.js"></script>
+        map.addPlugin(mp);
+    </script>
 </body>
 
 </html>
