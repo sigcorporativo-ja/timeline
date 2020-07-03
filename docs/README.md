@@ -29,11 +29,7 @@ Plugin de línea del tiempo
   - 'TR':top right (default)
   - 'BL':bottom left
   - 'BR':bottom right
-
-# Eventos
-
-# Otros métodos
-
+  
 # Ejemplos de uso
 
 ## Ejemplo
