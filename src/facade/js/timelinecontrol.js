@@ -152,7 +152,6 @@ export default class TimelineControl extends M.Control {
    */
   changeSlider(elem) {
     const left = (((elem.value - elem.min) / (elem.max - elem.min)) * ((256 - 5) - 5)) + 5;
-    console.log(left); //eslint-disable-line
     document.querySelector('.div-m-timeline-slider').style.setProperty('--left', left + 'px');
     document.querySelector('.div-m-timeline-slider').style.setProperty('--opacity', '1');
     document.querySelector('.m-timeline-names').style.display = 'block';
