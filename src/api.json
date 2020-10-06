@@ -16,6 +16,16 @@
         "type": "simple",
         "name": "intervals",
         "position": 1
+      },
+      {
+        "type": "boolean",
+        "name": "animation",
+        "position": 2
+      },
+      {
+        "type": "simple",
+        "name": "speed",
+        "position": 3
       }
     ]
   }],
