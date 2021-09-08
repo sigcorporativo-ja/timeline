@@ -49,7 +49,7 @@ export default class TimelineControl extends M.Control {
     return new Promise((success, fail) => {
       let intervals = [];
       this.intervals.forEach((interval, k) => {
-        const layer = this.transformToLayers(interval[2]);
+        const layer = this.transformToLayers(interval[2],interval[0]);
         const copy = this.getMapLayer(layer);
         if (copy !== undefined) {
           this.map.removeLayers(copy);
@@ -110,7 +110,7 @@ export default class TimelineControl extends M.Control {
    * @param {string}
    * @return
    */
-  transformToLayers(layer) {
+  transformToLayers(layer,label) {
     let newLayer = null;
     if (!(layer instanceof Object)) {
       if (layer.indexOf('*') >= 0) {
@@ -118,12 +118,14 @@ export default class TimelineControl extends M.Control {
         if (urlLayer[0].toUpperCase() == 'WMS') {
           newLayer = new M.layer.WMS({
             url: urlLayer[2],
-            name: urlLayer[3]
+            name: urlLayer[3],
+            legend: label
           });
         } else if (urlLayer[0].toUpperCase() == 'WMTS') {
           newLayer = new M.layer.WMTS({
             url: urlLayer[2],
-            name: urlLayer[3]
+            name: urlLayer[3],
+            legend: label
           });
         }
       } else {
@@ -163,11 +165,19 @@ export default class TimelineControl extends M.Control {
     let step = parseFloat(elem.value);
     this.intervals.forEach((interval) => {
       this.getMapLayer(interval.service).setVisible(false);
+      this.getMapLayer(interval.service).displayInLayerSwitcher = false;
+      if(this.map.getControls({'name':'layerswitcher'}).length >0){
+        this.map.getControls({'name':'layerswitcher'})[0].render();
+      }
       document.querySelector('.m-timeline-names').innerHTML = '';
     });
     if (step % 1 == 0) {
       document.querySelector('.div-m-timeline-slider').style.setProperty('--left', left + 20 + 'px');
       this.getMapLayer(this.intervals[step].service).setVisible(true);
+      this.getMapLayer(this.intervals[step].service).displayInLayerSwitcher = true;
+      if(this.map.getControls({'name':'layerswitcher'}).length >0){
+        this.map.getControls({'name':'layerswitcher'})[0].render();
+      }
       document.querySelector('.m-timeline-names').innerHTML = this.intervals[step].name;
       document.querySelector('.div-m-timeline-panel').style.setProperty('--valor', '"' + this.intervals[step].tag + '"');
       if (this.intervals[step].tag !== '') {
@@ -177,7 +187,12 @@ export default class TimelineControl extends M.Control {
       }
     } else {
       this.getMapLayer(this.intervals[parseInt(step)].service).setVisible(true);
+      this.getMapLayer(this.intervals[parseInt(step)].service).displayInLayerSwitcher = true;
       this.getMapLayer(this.intervals[parseInt(step) + 1].service).setVisible(true);
+      this.getMapLayer(this.intervals[parseInt(step) + 1].service).displayInLayerSwitcher = true;
+      if(this.map.getControls({'name':'layerswitcher'}).length >0){
+        this.map.getControls({'name':'layerswitcher'})[0].render();
+      }
       if (this.intervals[parseInt(step)].tag !== '' && this.intervals[parseInt(step) + 1].tag !== '') {
         document.querySelector('.div-m-timeline-slider').style.setProperty('--left', left + 'px');
         document.querySelector('.div-m-timeline-slider').style.setProperty('--opacity', '1');
